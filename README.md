@@ -5,8 +5,6 @@
 <img src="/pregrasp.jpg" width="270" height="350">
 </p>
 
-
-
 ## Demonstration videos
 
 Successful grasps:  
@@ -22,3 +20,15 @@ https://youtu.be/dziLtvFLTpc
 Visualizations:  
 https://youtu.be/MQvtPGrG9rY  
 https://youtu.be/M_flOcwguvU  
+
+## Prerequisites
+Ubuntu   version: 16.04.7 LTS  
+ROS    	 version: kinetic  
+_________________________________________________________________________________
+## Installation
+__________________________________________________________________________________
+## Running
+__________________________________________________________________________________  
+## Testing and debugging    
+__________________________________________________________________________________
+## Notes
