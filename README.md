@@ -1,4 +1,12 @@
 # Planar-Grasping-Platform
+
+<p float="left">
+<img src="/intro_shot.jpg" width="270" height="350">
+<img src="/pregrasp.jpg" width="270" height="350">
+</p>
+
+
+
 ## Demonstration videos
 
 Successful grasps:  
