@@ -1,0 +1,9 @@
+
+cnn.launch uses a bash script to start the CNN for generating grasps 
+The pytorch CNN itself is not contained within this package, or any other ROS package
+
+-References:
+
+Used to run CNN in Anaconda from within ROS:
+https://dominoc925.blogspot.com/2020/03/how-to-run-shell-script-from-ros-launch.html
+https://thelinuxcluster.com/2020/05/21/cant-execute-conda-activate-from-bash-script/

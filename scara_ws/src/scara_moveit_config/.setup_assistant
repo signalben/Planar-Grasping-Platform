@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/ben/moveit_ws/src/scara/scara.urdf
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/scara.srdf
+  CONFIG:
+    author_name: ben
+    author_email: bevans442@live.com
+    generated_timestamp: 1627733691

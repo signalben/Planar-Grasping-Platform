@@ -1,0 +1,8 @@
+The scara driver package provides an interface between ROS and the controllers for the manipulator and gripper.
+
+The driver node requires a device connected to /dev/ttyUSB0 to run, and will not tolerate disconnection of the device whilst running.
+However, the positions of the arm are stored by GRBL, so the driver node may be restarted without losing the position of the arm.
+
+The user node is primarily for debugging/inspection of the microcontrollers via serial.
+However, it is required to manually enable and home the arm on startup with '&E' and '#$H'
+

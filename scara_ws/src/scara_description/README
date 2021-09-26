@@ -1,0 +1,7 @@
+The scara description package contains:
+
+-STl files for each link of the scara arm and gripper
+
+-The URDF describing the kinematics scara arm and gripper
+	Upon this URDF moveit depends for control of the arm and RVIZ depends for visualization of the STL files.
+	The URDF was automatically created by the SolidWorks to URDF Exporter- Originally created by Stephen Brawner (brawner@gmail.com), http://wiki.ros.org/sw_urdf_exporter

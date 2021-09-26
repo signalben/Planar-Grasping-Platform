@@ -1,0 +1,34 @@
+<launch>
+	<arg name="realsense" default="1" />
+
+	<param name="move_group/trajectory_execution/allowed_execution_duration_scaling" value="4.0" />
+	<param name="move_group/trajectory_execution/execution_duration_monitoring" value="false" />
+
+	<param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager" />
+
+	<rosparam file="$(find scara_moveit_config)/config/joint_limits.yaml"/>
+
+	<rosparam command="load" file="$(find scara_moveit_config)/config/joint_names.yaml"/>
+	<include file="$(find scara_moveit_config)/launch/planning_context.launch">
+	<arg name="load_robot_description" value="true" />
+	</include>
+
+	<node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args = "0.058708112502346477 0.1840949007510787 0.49502847734130473 -0.41357015  0.41670009  0.56008568  0.58448677 world 		camera_link 100" />
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
+	<param name="/use_gui" value="false"/>
+	<rosparam param="/source_list">[/update/joint_states]</rosparam>
+	</node>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+	 <group if="$(arg realsense)">
+	    <include file="$(find realsense2_camera)/launch/rs_rgbd.launch">
+	    </include>
+	  </group>
+
+	<include file="$(find scara_moveit_config)/launch/scara.launch">
+	</include>
+
+</launch>
+

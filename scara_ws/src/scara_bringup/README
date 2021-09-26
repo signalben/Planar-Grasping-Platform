@@ -1,0 +1,17 @@
+
+bringup.launch is responable for:
+loading the parameters needed to start moveit
+starting a static transform publisher for the camera links pose
+starting a joint state publisher to allow other nodes asyncronous access to joint states
+starting a robot state publisher to give tf frames for each link based on the joint states
+launching the realsense camera node (unless realsense:= 0 is given as an argument)
+launching scara.launch (which in turn launches moveit and RVIZ)
+
+Moveit will be unable to control the arm if the following nodes are not already running before launching bringup.launch:
+rosrun scara_driver driver
+rosrun scara_grasping joint_trajectory_action.py
+
+The following must then be run to view/execute grasps: 
+roslaunch scara_grasping cnn.launch
+rosrun scara_grasping execute_grasps.py or rosrun scara_grasping view_grasps.py
+

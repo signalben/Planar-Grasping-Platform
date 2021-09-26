@@ -1,0 +1,2 @@
+This package contains the configuration and launch files required to control the SCARA arm with the moveit package.
+-Do not run/launch any files in this package directly, they are called from scara_bringup bringup.launch. 

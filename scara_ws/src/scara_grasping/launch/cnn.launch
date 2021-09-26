@@ -1,0 +1,10 @@
+<launch>
+
+  <node pkg="scara_grasping"
+     type="cnn_launch.bash" name="ggcnn_init_script"
+     output="screen"
+  />
+
+</launch>
+
+

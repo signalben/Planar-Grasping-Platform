@@ -1,0 +1,11 @@
+
+The following scripts assume top-level control of the manipulator and should not be run simultaneously:
+
+execute_grasps.py - runs routine for autonomous grasping trials, produces single grasp for each attempt
+view_grasps.py    - derivative of execute_grasps.py, does not move the manipulator, but continously produces and visualizes grasps
+calibration.py    - calibrates cameras frame relative to the world frame by observing motions of the end-effector
+
+
+
+	
+

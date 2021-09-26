@@ -1,0 +1,5 @@
+These launch files are required for loading moveits move_group node
+-Do not run/launch any files in this package directly, they are called from scara_bringup bringup.launch via scara.launch
+
+scara.launch in turn loads move_group.launch and rviz.launch
+move_group.launch loads parameters from .yaml files in scara_moveit_config/config 

@@ -1,0 +1,15 @@
+controller_list:
+ - name: /scara
+   action_ns: follow_joint_trajectory
+   type: FollowJointTrajectory
+   default: true
+   joints:
+      - XJ
+      - YJ
+      - ZJ
+      - AJ
+      - G0
+      - G1
+
+
+

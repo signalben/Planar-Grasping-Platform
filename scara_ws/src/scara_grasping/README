@@ -1,0 +1,19 @@
+
+In /scripts, the scara_grasping package provides high-level functionality for:
+	executing grasps
+	viewing grasps
+	calibrating the cameras frame relative to the world
+
+These functionalities depend on scripts in scripts/utils, which provide:
+	a link via sockets to the CNN, which also captures depth images (cnn_link.py)
+	a controller for MoveIt (joint_trajectory_action.py)
+	helper classes for control of the gripper (move_gripper.py)
+	helper classes for control using MoveIt (move_group.py)
+	helper classes for tf functions (projection.py)
+	helper classes for obtaining the grippers position visually, which also captures RGB images (visual_feedback.py)
+
+cnn.launch uses a bash script to start the CNN for generating grasps 
+
+
+	
+

@@ -1,0 +1,23 @@
+
+Dependancies:
+
+sudo apt-get install ros-kinetic-joint-state-publisher 
+sudo apt-get install ros-kinetic-robot_state_publisher
+sudo apt-get install ros-kinetic-xacro
+sudo apt install ros-kinetic-moveit
+
+scara_ws contains packages, folders for operation of the SCARA manipulator and gripper:
+
+serial              - folder contains C++ library to allow USB serial port comms 
+scara_driver        - allows ROS control over serial
+scara_description   - folder contains URDF and STLs of mechanical design
+scara_moveit_config - configuration for control of arm with moveit  
+scara_bringup       - runs static camera transform, joint state publisher, robot state publisher, realsense camera, moveit, rviz
+scara_grasping      - controller for moveit to control arm. Starts the CNN. Provides routines for grasp execution, grasp visualization and calibration of camera pose
+
+References:
+Serial library
+Website: http://wjwwood.github.io/serial/
+
+All other packages and folders were developed as part of this work, but depend on referenced existing work and code
+

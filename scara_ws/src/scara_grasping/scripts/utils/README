@@ -1,0 +1,14 @@
+
+These utility scripts do not assume top-level control, but provide common functions to those that do: 
+
+	cnn_link.py 			- a link via sockets to the CNN, which also captures depth images 
+	joint_trajectory_action.py 	- a controller for MoveIt 
+	move_gripper.py 		- helper classes for control of the gripper 
+	move_group.py 			- helper classes for control using MoveIt 
+	projection.py 			- helper classes for tf functions 
+	visual_feedback.py 		- helper classes for obtaining the grippers position visually, which also captures RGB images
+
+
+
+	
+

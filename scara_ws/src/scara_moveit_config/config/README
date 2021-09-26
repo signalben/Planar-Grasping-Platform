@@ -1,0 +1,4 @@
+These files store parameter values for the configuration of moveit
+
+ros_controllers.yaml specifies which joints moveit has control of, and the type of controller for it to expect on startup
+scara.srdf 
