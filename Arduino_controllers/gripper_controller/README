@@ -1,0 +1,21 @@
+
+gripper.ino is designed for use on a Arduino Nano.
+
+It has 4 main purposes:
+	1-Pass serial communication recieved on port0 (PC) to port1 (Arduino Mega running GRBl)
+	2-Pass feedback from GRBl to PC
+	3-Control the gripper as specified by PC
+	4-Pass feedback from the gripper to PC
+
+Since the Nano has only one hardware serial port, AltSoftSerial is used for port1.
+
+The main loop simply checks port0 and port1 for incoming mesages. Messages from GRBL are forwarded to the PC.
+Messages from the PC are either passed to GRBL, or interpreted as a gripper command (depnding on prefix # or &) 
+Gripper commands may (depending on prefixes C,D,L,H,S,P)
+	E -enable communication with the gripper and arm
+	C -control the gripper using PID to a specified position
+	D -disable communication with the gripper and arm
+	L -report the minimum safe sensor value
+	H -report the maximum safe sensor value
+	S -report the current sensor value
+	P -close the gripper using a constant PWM value

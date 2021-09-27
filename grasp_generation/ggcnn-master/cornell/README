@@ -1,0 +1,8 @@
+
+The Cornell grasping dataset is over 11gb, so it is not included here.
+
+The original link for downloading the Cornell grasping dataset is dead, but it can be downloaded from:
+	https://www.kaggle.com/oneoneliu/cornell-grasp
+
+After downloading, extract into this folder, giving this structure:
+	Planar-Grasping-Platform/grasp_generation/ggcnn-master/cornell/samples

@@ -1,0 +1,12 @@
+
+
+GRBL is used for low-level control of the scara arm by an Arduino Mega.
+This existing software has not been modified, other than setting configuration parameters
+
+To flash GRBL onto an Arduino Mega2560:
+	-in the Arduino IDE, open grbl-Mega-4axis-4axis/grbl/examples/grblUpload.ino
+	-compile & upload only grblUpload.ino, it pulls in everything else
+
+Reference:
+
+	https://github.com/dguerizec/grbl-Mega-4axis

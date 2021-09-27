@@ -1,0 +1,35 @@
+
+The file lists the Jupiter Cell commands used within Google Colab to train the GGCNN and derivatives of it remotely
+Upload is much quicker without orginal .pcd files from Cornell dataset,
+Once .tiffs are produced by ggcnn-master/utils/dataset_processing/generate_cornell_depth.py, GGCNN training only uses the much smaller .tiffs
+
+#check that GPU is assigned
+	!nvidia-smi
+
+#mount google drive as persistant storage (prompts browser login)
+	from google.colab import drive
+	drive.mount('/content/gdrive')
+
+#navigate to /root of runtime instance machine
+	cd
+
+#make folder for temporary storage local to runtime instance 
+	mkdir /content/ggcnn-master
+
+#copy entire dataset, everything else needed for training to runtime instance
+#make take 1hr+    
+	!cp -r "/content/gdrive/My Drive/ggcnn-master" "/content/ggcnn-master"
+
+#navigate train_ggcnn.py directory
+	cd /content/ggcnn-master/ggcnn-master/
+
+#begin training 
+#use run after (ctrl F10), so that following commands are executed automatically
+#1 epoch = around 4 mins on Tesla V100
+	!python3 train_ggcnn.py --description test10 --network ggcnn2 --dataset cornell --dataset-path "cornell" --epochs 100
+
+#navigate to /root
+	cd
+
+#copy trained model to google drive
+!cp -r "/content/ggcnn-master/ggcnn-master/output" "/content/gdrive/My Drive"

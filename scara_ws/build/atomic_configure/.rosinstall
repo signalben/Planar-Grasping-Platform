@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ben/Planar-Grasping-Platform/scara_ws/devel/setup.sh

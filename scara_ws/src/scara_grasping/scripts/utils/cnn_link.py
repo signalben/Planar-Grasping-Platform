@@ -12,6 +12,7 @@ import matplotlib.image as mpimg
 import math
 
 #class is responsable for getting depth images, sending them to the CNN, returning grasps from the CNN
+#matches sockets in Planar-Grasping-Platform/grasp_generation/ggcnn-master/ROSlink.py
 class depthSub:
 
     def __init__(self, full_FOV):

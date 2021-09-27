@@ -1,0 +1,5 @@
+
+This software allows low-level actuation of the scara arm and gripper, controlled over USB serial. 
+
+The gripper controller was developed as part of this work, but includes code references. It runs on an Arduino Nano.
+The scara controller is existing software. It runs on an Arduino Mega 2560.

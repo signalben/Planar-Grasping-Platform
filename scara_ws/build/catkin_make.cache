@@ -1,0 +1,2 @@
+scara_bringup:scara_driver:scara_grasping:scara_moveit_config:serial
+-DCATKIN_DEVEL_PREFIX=/home/ben/Planar-Grasping-Platform/scara_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ben/Planar-Grasping-Platform/scara_ws/install -G Unix Makefiles

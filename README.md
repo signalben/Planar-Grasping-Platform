@@ -19,13 +19,28 @@ https://youtu.be/dziLtvFLTpc
 
 Visualizations:  
 https://youtu.be/MQvtPGrG9rY  
-https://youtu.be/M_flOcwguvU  
+https://youtu.be/M_flOcwguvU
+
+## Components
+scara_CAD 		- Contains the Solidworks models of the scara arm, gripper, and mounts for the endstops, camera, microcontroller
+Arduino_controllers	- Contains the Arduino sketches used for low-level control of the scara arm and gripper
+electrical_schematic	- Details electrical components used and is a full wiring diagram
+scara_ws		- Is the ROS workspace used for high-level control of the arm
+grasp_generation	- Is the implimentation used for generating planar grasps from depth images
 
 ## Prerequisites
 Ubuntu   version: 16.04.7 LTS  
 ROS    	 version: kinetic  
 _________________________________________________________________________________
 ## Installation
+$ cd Planar-Grasping-Platform/scara_ws/
+$ catkin_make
+$ sudo gedit ~/.bashrc
+---Add the fullpath of scara_ws/devel/setup.bash to bashrc:
+$ source /home/"YOUR_USERNAME"/Planar-Grasping-Platform/scara_ws/devel/setup.bash
+
+
+source ~/anaconda3/etc/profile.d/conda.sh
 __________________________________________________________________________________
 ## Running
 __________________________________________________________________________________  

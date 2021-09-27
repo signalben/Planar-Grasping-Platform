@@ -1,0 +1,46 @@
+
+An existing grasp generation method is used in this work https://github.com/dougsm/ggcnn
+However, it has been modified - Please refer to 'original_documentation' folder for documentation of the GGCNN as provided by its creators[1]
+
+This README details the adaptions made for use with the planar grasping platform.
+
+The following files have been added:
+	- ggcnn-master/run.py				- gives grasps from depth images, calibrates background 
+	- ggcnn-master/ROSlink.py			- allows communication with ROS usings sockets
+	- ggcnn-master/models/ggcnn2_bn.py		- derivative of GGCNN2 with addition of batchnormalization
+
+The following folders have been added:
+	- pretrained_models				- contains models trained using Google Colab
+	- trained_models				- contains pretrained models obtained from https://github.com/dougsm/ggcnn/releases/tag/v0.1 
+	- cornell					- containes the Cornell Grasping Dataset 
+
+The following files have been modified:
+	- ggcnn-master/train_ggcnn.py			- OpenCV compatibility change, removed use of TensorboardX
+	- ggcnn-master/utils/data/cornell_data.py	- OpenCV change, changed to use floating depth images 
+
+The original link for downloading the Cornell grasping dataset is dead, but it can be obtained from:
+	https://www.kaggle.com/oneoneliu/cornell-grasp
+
+To avoid compatability issues the files contained in ggcnn-master are run in an Anaconda environment:
+          conda version : 4.5.4
+         python version : 3.6.5
+
+To create the environment 'gr', and install the required packages:
+
+conda create --name gr python=3
+conda activate gr
+
+conda install numpy
+conda install matplotlib
+conda install scikit-image
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+conda install -c menpo opencv
+
+References:
+
+[1]	title={{Closing the Loop for Robotic Grasping: A Real-time, Generative Grasp Synthesis Approach}},
+	author={Morrison, Douglas and Corke, Peter and Leitner, J\"urgen},
+	booktitle={Proc.\ of Robotics: Science and Systems (RSS)},
+	year={2018}
+
+
