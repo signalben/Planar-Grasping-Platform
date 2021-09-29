@@ -26,11 +26,11 @@ from cv_bridge import CvBridge, CvBridgeError
 """
 roscore
 rosrun scara_driver driver <- Requires arm to be connected via serial
-rosrun scara_driver user <- Enable communications with '&E', home arm with '#$H'
+rosrun scara_driver user <- &E #$X  run
 rosrun scara_grasping joint_trajectory_action.py
- 
-roslaunch scara_bringup bringup.launch <- Expects Realsense to be plugged in 
+roslaunch scara_bringup bringup.launch 
 roslaunch scara_grasping cnn.launch
+
 rosrun scara_grasping execute_grasps.py
 """
 full_FOV = 0 			#use all of FOV or just central portion
