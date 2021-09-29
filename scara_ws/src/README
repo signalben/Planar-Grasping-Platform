@@ -31,6 +31,7 @@ sudo rosdep init
 rosdep update
 _________________________________________________________________________________
 ## Installation of ROS packages
+
 -In a new terminal:
 cd Planar-Grasping-Platform/scara_ws/
 catkin_make
