@@ -10,7 +10,7 @@ from utils.dataset_processing import grasp, image
 """
 Modified from orginal file:
 - The get_depth function has been produced which returns floating images for this dataset
-- The original get_depth commented out for training with standard images
+- The original get_depth left commented out for training with standard images
 - OpenCV import is changed to avoid importing ROS version
 """
 
@@ -75,7 +75,7 @@ class CornellDataset(GraspDatasetBase):
         depth_img.zoom(zoom)
         depth_img.resize((self.output_size, self.output_size))
         return depth_img.img
-    """
+    
 
         #get_depth converts depth images to 'floating' format before returning them
     def get_depth(self, idx, rot=0, zoom=1.0):
@@ -188,7 +188,7 @@ class CornellDataset(GraspDatasetBase):
         depth[box[0]:box[1],box[2]:box[3]] = roi
 
         return depth/10 #return full image, /10 to give values in range of -1 to 1
-
+    """
     def get_rgb(self, idx, rot=0, zoom=1.0, normalise=True):
         rgb_img = image.Image.from_file(self.rgb_files[idx])
         center, left, top = self._get_crop_attrs(idx)
