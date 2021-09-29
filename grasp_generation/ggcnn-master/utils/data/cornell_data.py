@@ -65,7 +65,7 @@ class CornellDataset(GraspDatasetBase):
         return gtbbs
 
         #original get_depth function, uncomment to give standard depth images
-    
+    """
     def get_depth(self, idx, rot=0, zoom=1.0):
         depth_img = image.DepthImage.from_tiff(self.depth_files[idx])
         center, left, top = self._get_crop_attrs(idx)
@@ -75,7 +75,7 @@ class CornellDataset(GraspDatasetBase):
         depth_img.zoom(zoom)
         depth_img.resize((self.output_size, self.output_size))
         return depth_img.img
-    
+    """
 
         #get_depth converts depth images to 'floating' format before returning them
     def get_depth(self, idx, rot=0, zoom=1.0):
@@ -188,7 +188,7 @@ class CornellDataset(GraspDatasetBase):
         depth[box[0]:box[1],box[2]:box[3]] = roi
 
         return depth/10 #return full image, /10 to give values in range of -1 to 1
-    """
+
     def get_rgb(self, idx, rot=0, zoom=1.0, normalise=True):
         rgb_img = image.Image.from_file(self.rgb_files[idx])
         center, left, top = self._get_crop_attrs(idx)
@@ -200,7 +200,6 @@ class CornellDataset(GraspDatasetBase):
             rgb_img.normalise()
             rgb_img.img = rgb_img.img.transpose((2, 0, 1))
         return rgb_img.img
-    """
 
 """
 References:
