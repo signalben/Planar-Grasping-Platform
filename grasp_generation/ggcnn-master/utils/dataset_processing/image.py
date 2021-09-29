@@ -1,4 +1,8 @@
+import sys
+sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages') # in order to import cv2 under python3
 import cv2
+sys.path.append('/opt/ros/kinetic/lib/python2.7/dist-packages') # append back in order to import rospy
+
 import numpy as np
 import matplotlib.pyplot as plt
 from imageio import imread
@@ -223,3 +227,9 @@ class WidthImage(Image):
         Normalise by mapping [0, 150] -> [0, 1]
         """
         self.img = np.clip(self.img, 0, 150.0)/150.0
+
+"""
+References:
+	Method used to import OpenCV for Python 3 rather than the 2.7 versioned used by ROS:
+	https://answers.ros.org/question/290660/import-cv2-error-caused-by-ros/
+"""

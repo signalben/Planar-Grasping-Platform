@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>scara_grasping</name>
+  <name>scara_description</name>
   <version>0.0.0</version>
-  <description>The scara_grasping package</description>
+  <description>The scara_description package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -15,10 +15,11 @@
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
   <license>TODO</license>
 
+
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/scara_grasping</url> -->
+  <!-- <url type="website">http://wiki.ros.org/scara_description</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -48,9 +49,6 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-
-  <build_depend>message_generation</build_depend>
-  <exec_depend>message_runtime</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

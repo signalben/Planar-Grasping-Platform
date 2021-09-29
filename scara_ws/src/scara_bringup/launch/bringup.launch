@@ -1,5 +1,6 @@
 <launch>
 	<arg name="realsense" default="1" />
+	<arg name="camera_pose" default="1" />
 
 	<param name="move_group/trajectory_execution/allowed_execution_duration_scaling" value="4.0" />
 	<param name="move_group/trajectory_execution/execution_duration_monitoring" value="false" />
@@ -15,10 +16,12 @@
 
 	<node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args = "0.058708112502346477 0.1840949007510787 0.49502847734130473 -0.41357015  0.41670009  0.56008568  0.58448677 world 		camera_link 100" />
 
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
-	<param name="/use_gui" value="false"/>
-	<rosparam param="/source_list">[/update/joint_states]</rosparam>
-	</node>
+	<group if="$(arg camera_pose)">
+		<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
+		<param name="/use_gui" value="false"/>
+		<rosparam param="/source_list">[/update/joint_states]</rosparam>
+		</node>
+	</group>
 
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
 

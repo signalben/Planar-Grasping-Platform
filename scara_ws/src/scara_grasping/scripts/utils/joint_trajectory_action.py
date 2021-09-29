@@ -9,7 +9,7 @@ from control_msgs.msg    import FollowJointTrajectoryResult
 from control_msgs.msg    import FollowJointTrajectoryFeedback
 from control_msgs.msg    import FollowJointTrajectoryAction
 from trajectory_msgs.msg import JointTrajectory
-from scara_driver.msg import *
+from scara_grasping.msg  import * 
 from sensor_msgs.msg	 import JointState
 from std_msgs.msg	 import Char
 from std_msgs.msg	 import Float32
@@ -38,8 +38,8 @@ class JTAction(object):
 
 	def execute_cb(self, goal): #when goal recieved from moveit
 			trajectory_point = goal.trajectory.points[-1].positions #take the last waypoint specified as the desired position
-			rospy.logwarn("Goal recieved")
-			rospy.logwarn(trajectory_point)
+			print("Goal recieved")
+			print(trajectory_point)
 
 			target_joint_states = JointState() #construct a joint state message containing the desired position
 			joint_names = goal.trajectory.joint_names		
@@ -47,22 +47,22 @@ class JTAction(object):
 			target_joint_states.name = joint_names
 
 			self.joint_pub.publish(target_joint_states) #publish this desired joint state as a target for the driver node to acheive
-			rospy.logwarn("Sent target to GRBL")
+			print("Sent target to GRBL")
 
 			feedback.recent = False
-			rospy.logwarn("Waiting for feedback")
+			print("Waiting for feedback")
 			while(feedback.recent == False):	#block until new total_joint_error is reported by driver node (should be non-zero, as new target just set) 
 				rospy.sleep(0.01)
 			
-			rospy.logwarn("Start position error: " + str(feedback.error)) #print total joint error at start of move, feedback start position to moveit
+			print("Start position error: " + str(feedback.error)) #print total joint error at start of move, feedback start position to moveit
 			self.update_feedback()
 			while(feedback.error > 0.1):	#block until error is below 0.1	
 				rospy.sleep(0.01)
 
-			rospy.logwarn("End position error: " + str(feedback.error)) #feedback new position to moveit, mark as action succeeded
+			print("End position error: " + str(feedback.error)) #feedback new position to moveit, mark as action succeeded
 			self.update_feedback()
 			self._as.set_succeeded(self._result)
-			rospy.logwarn("Complete")
+			print("Complete")
 
 	#initialize action sever, allow publishing of target joint states
 	def __init__(self):
@@ -85,7 +85,7 @@ class JTAction(object):
 if __name__ == '__main__':
 	rospy.init_node('scara_action_server')
 	feedback = feedback_sub()
-	rospy.logwarn("Action server running...")
+	print("Action server running...")
 	JTAction()
 	rospy.spin()
 

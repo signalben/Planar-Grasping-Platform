@@ -5,18 +5,19 @@ However, it has been modified - Please refer to 'original_documentation' folder 
 This README details the adaptions made for use with the planar grasping platform.
 
 The following files have been added:
-	- ggcnn-master/run.py				- gives grasps from depth images, calibrates background 
-	- ggcnn-master/ROSlink.py			- allows communication with ROS usings sockets
-	- ggcnn-master/models/ggcnn2_bn.py		- derivative of GGCNN2 with addition of batchnormalization
+	- ggcnn-master/run.py				 - gives grasps from depth images, calibrates background 
+	- ggcnn-master/ROSlink.py			 - allows communication with ROS usings sockets
+	- ggcnn-master/models/ggcnn2_bn.py		 - derivative of GGCNN2 with addition of batchnormalization
 
 The following folders have been added:
-	- pretrained_models				- contains models trained using Google Colab
-	- trained_models				- contains pretrained models obtained from https://github.com/dougsm/ggcnn/releases/tag/v0.1 
-	- cornell					- containes the Cornell Grasping Dataset 
+	- pretrained_models				 - contains models trained using Google Colab
+	- trained_models				 - contains pretrained models obtained from https://github.com/dougsm/ggcnn/releases/tag/v0.1 
+	- cornell					 - containes the Cornell Grasping Dataset 
 
 The following files have been modified:
-	- ggcnn-master/train_ggcnn.py			- OpenCV compatibility change, removed use of TensorboardX
-	- ggcnn-master/utils/data/cornell_data.py	- OpenCV change, changed to use floating depth images 
+	- ggcnn-master/train_ggcnn.py			 - OpenCV compatibility change, removed use of TensorboardX
+	- ggcnn-master/utils/data/cornell_data.py	 - OpenCV compatibility change, changed to use floating depth images
+        - ggcnn-master/utils/dataset_processing/image.py - OpenCV compatibility change 
 
 The original link for downloading the Cornell grasping dataset is dead, but it can be obtained from:
 	https://www.kaggle.com/oneoneliu/cornell-grasp
@@ -30,11 +31,39 @@ To create the environment 'gr', and install the required packages:
 conda create --name gr python=3
 conda activate gr
 
+conda install -c anaconda python=3.7
 conda install numpy
-conda install matplotlib
+conda install pytorch=1.7.1 torchvision torchaudio cudatoolkit=10.1 -c pytorch
+conda install matplotlib 
 conda install scikit-image
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 conda install -c menpo opencv
+pip install torchsummary
+
+conda list 
+
+- The packages should resolve to compatable versions:
+
+python                    3.7.10
+numpy                     1.19.2
+matplotlib                3.3.4
+pytorch                   1.7.1         
+torchvision               0.8.2
+torchaudio                0.7.2
+cudatoolkit               10.1.243
+scikit-image              0.18.1
+opencv                    3.4.2
+torchsummary              1.5.1
+
+The pointcloud files of the Cornell dataset will need to be converted to .tiffs:
+
+python -m utils.dataset_processing.generate_cornell_depth ggcnn-master/cornell
+
+python eval_ggcnn.py --network pretrained_models/epoch_50_cornell --dataset cornell --dataset-path 	ggcnn-master/cornell --iou-eval
+python train_ggcnn.py --description training_example2 --network ggcnn2 --dataset cornell  --dataset-path 	ggcnn-master/cornell
+
+python -m utils.dataset_processing.generate_cornell_depth /home/ben/ggcnn2/ggcnn-master/cornell
+python eval_ggcnn.py --network pretrained_models/epoch_50_cornell --dataset cornell --dataset-path /home/ben/ggcnn2/ggcnn-master/cornell --iou-eval
+
 
 References:
 

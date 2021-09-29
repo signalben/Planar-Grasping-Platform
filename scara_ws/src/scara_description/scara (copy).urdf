@@ -17,7 +17,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/base_link.STL" /> 
+          filename="file:~/scara_description_symlink/base_link.STL" /> 
       </geometry>
       <material
         name="">
@@ -31,7 +31,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/base_link.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -58,7 +58,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/ZL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/ZL.STL" />
       </geometry>
       <material
         name="">
@@ -72,7 +72,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/ZL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/ZL.STL" />
       </geometry>
     </collision>
   </link>
@@ -100,7 +100,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/XL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/XL.STL" />
       </geometry>
       <material
         name="">
@@ -114,7 +114,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/XL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/XL.STL" />
       </geometry>
     </collision>
   </link>
@@ -142,7 +142,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/YL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/YL.STL" />
       </geometry>
       <material
         name="">
@@ -156,7 +156,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/YL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/YL.STL" />
       </geometry>
     </collision>
   </link>
@@ -184,7 +184,7 @@
         rpy="0 0 -2.6335" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/AL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/AL.STL" />
       </geometry>
       <material
         name="">
@@ -198,7 +198,7 @@
         rpy="0 0 -2.6335" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/AL.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/AL.STL" />
       </geometry>
     </collision>
   </link>
@@ -226,7 +226,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/jaw0.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/jaw0.STL" />
       </geometry>
       <material
         name="">
@@ -240,7 +240,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/jaw0.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/jaw0.STL" />
       </geometry>
     </collision>
   </link>
@@ -268,7 +268,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/jaw1.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/jaw1.STL" />
       </geometry>
       <material
         name="">
@@ -282,7 +282,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file:///home/ben/Planar-Grasping-Platform/scara_ws/src/scara_description/jaw1.STL" />
+          filename="file:///home/ben/scara_ws/src/scara_description/jaw1.STL" />
       </geometry>
     </collision>
   </link>

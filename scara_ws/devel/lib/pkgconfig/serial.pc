@@ -1,8 +1,0 @@
-prefix=/home/ben/Planar-Grasping-Platform/scara_ws/devel
-
-Name: serial
-Description: Description of serial
-Version: 1.2.1
-Cflags: -I/home/ben/Planar-Grasping-Platform/scara_ws/src/serial/include
-Libs: -L${prefix}/lib -lserial -lrt -lpthread
-Requires: 

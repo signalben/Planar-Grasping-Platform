@@ -33,17 +33,59 @@ Ubuntu   version: 16.04.7 LTS
 ROS    	 version: kinetic  
 _________________________________________________________________________________
 ## Installation
-$ cd Planar-Grasping-Platform/scara_ws/
-$ catkin_make
-$ sudo gedit ~/.bashrc
----Add the fullpath of scara_ws/devel/setup.bash to bashrc:
-$ source /home/"YOUR_USERNAME"/Planar-Grasping-Platform/scara_ws/devel/setup.bash
+-In a new terminal:
+cd Planar-Grasping-Platform/scara_ws/
+catkin_make
+sudo gedit ~/.bashrc
 
+-Add the fullpath of scara_ws/devel/setup.bash to bashrc:
+ "source /home/"YOUR_USERNAME"/Planar-Grasping-Platform/scara_ws/devel/setup.bash" 
 
-source ~/anaconda3/etc/profile.d/conda.sh
+-In a new terminal:
+roscd scara_description
+python localize.py
 __________________________________________________________________________________
 ## Running
+
+-In a new terminal:
+roscore
+
+-In a new terminal:
+rosrun scara_driver driver
+
+-If connected to GRBL via tty/USB0, the following prints:
+[ INFO] [1632873809.317268255]: Connected to master at [localhost:11311]
+[ INFO] [1632873809.332904395]: Serial Port initialized
+Printing responses from GRBL and the gripper controller
+Ready - Use &E to enable control
+
+-In a new terminal:
+rosrun scara_driver user
+-In the same terminal:
+&E
+
+-The driver node should now print:
+&E
+Enabled control of arm and gripper
+&S-79
+
+-In the user terminal:
+ #$X
+
+-The driver node should now print:
+[MSG:Caution: Unlocked]
+
+-In a new terminal:
+rosrun scara_grasping joint_trajectory_action.py
+
+-In a new terminal:
+roslaunch scara_bringup bringup.launch 
+  - If no camera is plugged in, use realsense:=0 argument not to run the camera node 
+  - To disable the broadcast of a static transform for the camera use argument camera_pose:=0
+
 __________________________________________________________________________________  
 ## Testing and debugging    
 __________________________________________________________________________________
 ## Notes
+
+source ~/anaconda3/etc/profile.d/conda.sh

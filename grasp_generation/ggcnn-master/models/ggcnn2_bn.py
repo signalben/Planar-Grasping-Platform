@@ -2,6 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+#This file specifies the architecture of the the GGCNN2-BN, as used with floating images for the GGCNN2-BNF
+#It is a derivative of ggcnn2.py, with the addition of batch-normalization layers on lines 28, 32 and 36
+
 
 class GGCNN2(nn.Module):
     def __init__(self, input_channels=1, filter_sizes=None, l3_k_size=5, dilations=None):
@@ -32,7 +35,6 @@ class GGCNN2(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.BatchNorm2d(16),
             nn.ReLU(inplace=True),
-
 
             # Dilated convolutions.
             nn.Conv2d(filter_sizes[1], filter_sizes[2], kernel_size=l3_k_size, dilation=dilations[0], stride=1, padding=(l3_k_size//2 * dilations[0]), bias=True),

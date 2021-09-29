@@ -49,8 +49,6 @@ class CornellDataset(GraspDatasetBase):
         self.depth_files = depthf[int(l*start):int(l*end)]
         self.rgb_files = rgbf[int(l*start):int(l*end)]
 
-        self.background = imread("background.tiff")
-
     def _get_crop_attrs(self, idx):
         gtbbs = grasp.GraspRectangles.load_from_cornell_file(self.grasp_files[idx])
         center = gtbbs.center

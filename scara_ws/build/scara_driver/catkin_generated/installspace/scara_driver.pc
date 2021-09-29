@@ -1,8 +1,0 @@
-prefix=/home/ben/Planar-Grasping-Platform/scara_ws/install
-
-Name: scara_driver
-Description: Description of scara_driver
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib -lscara_driver
-Requires: roscpp rospy std_msgs
