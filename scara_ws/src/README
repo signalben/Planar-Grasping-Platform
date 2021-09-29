@@ -1,10 +1,6 @@
 
-Dependancies:
-
-sudo apt-get install ros-kinetic-joint-state-publisher 
-sudo apt-get install ros-kinetic-robot_state_publisher
-sudo apt-get install ros-kinetic-xacro
-sudo apt install ros-kinetic-moveit
+__________________________________________________________________________
+## Overview
 
 scara_ws contains packages, folders for operation of the SCARA manipulator and gripper:
 
@@ -20,4 +16,35 @@ Serial library
 Website: http://wjwwood.github.io/serial/
 
 All other packages and folders were developed as part of this work, but depend on referenced existing work and code
+__________________________________________________________________________
+## Installation of ROS
 
+Used following guide to install ROS kinetic:
+http://wiki.ros.org/kinetic/Installation/Ubuntu 
+
+This specific installation used: 
+sudo apt-get install ros-kinetic-desktop-full
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo rosdep init
+rosdep update
+_________________________________________________________________________________
+## Installation of ROS packages
+-In a new terminal:
+cd Planar-Grasping-Platform/scara_ws/
+catkin_make
+
+-Add the fullpath of scara_ws/devel/setup.bash to bashrc:
+echo "source /home/"YOUR_USERNAME"/Planar-Grasping-Platform/scara_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+-In a new terminal:
+roscd scara_description
+python localize.py
+
+-Install prerequisite packages:
+
+sudo apt-get install ros-kinetic-realsense2-camera
+sudo apt install ros-kinetic-rgbd-launch
+sudo apt-get install ros-kinetic-moveit 

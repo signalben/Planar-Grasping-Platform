@@ -27,6 +27,9 @@ std::string to_string(T val)
     return stream.str();
 }
 
+string use_port = "/dev/ttyUSB0";
+int use_baud = 57600;
+bool update = false;
 float gripper_yaw_offset; //variable used to offset gripper rotation
 serial::Serial ser;	  //declare serial port object
 
@@ -40,10 +43,21 @@ float high_lim[5] = {   0,    0, 220,   180, 770};
 
 //sends strings recieved on the write topic directly
 void write_callback(const std_msgs::String::ConstPtr& msg){
-    cout << msg->data << endl;
-    ser.write(msg->data);
-    ser.write("\r");
-    ser.write("\n");
+
+	cout << msg->data << endl;
+
+	if (msg->data == "run"){
+		update = true;
+		cout << "Updating Jointstates from GRBL.." << endl;
+	}
+
+	if (msg->data == "stop"){
+		update = false;
+		cout << "Not updating Jointstates" << endl;
+	}
+
+	string to_write = msg->data  + "\r" + "\n";
+	ser.write(to_write);
 }
 
 
@@ -194,7 +208,7 @@ int main (int argc, char** argv){
 	//try to open serial port, uses 57600 baud
     try
     {
-        ser.setPort("/dev/ttyUSB0");
+        ser.setPort(use_port);
         ser.setBaudrate(57600);
         serial::Timeout to = serial::Timeout::simpleTimeout(1000);
         ser.setTimeout(to);
@@ -221,6 +235,11 @@ int main (int argc, char** argv){
 
 	while(ros::ok()){//enter main loop
         ros::spinOnce();
+
+			if (update == true){ 
+				ser.write("#?"); //'?' prompts GRBL to report motor positions - sent at 10hz
+				ser.write("\r");
+				}
 
 
 	if(ser.available()){ //if anything waiting in serial buffer
@@ -306,16 +325,17 @@ int main (int argc, char** argv){
 				joint_state.position[2] = joint_angles[2]/1000;   //convert to metres for prismatic ZJ
 				joint_state.position[3] = (joint_angles[3]/57.2958) + gripper_yaw_offset; //apply gripper yaw offset to AJ
 				feedback_pub.publish(joint_state); //publish to update_joint_states
-				display = false; //don't print recieved message on screen as motor positions are requested from GRBL at 10hz
+
+				if (update == true){ 
+					display = false; //don't print recieved message on screen as motor positions are requested from GRBL at 10hz
 				}
 			}
+		}
 
 		if (display == true){ //do display messages from GRBL that are not reporting motor positions, as these may indicate errors
 		cout << recieved << endl;
 		}
 
-		ser.write("#?"); //'?' prompts GRBL to report motor positions - sent at 10hz
-		ser.write("\r");
         }
         loop_rate.sleep();
     }

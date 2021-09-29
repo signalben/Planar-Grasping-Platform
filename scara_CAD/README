@@ -1,0 +1,16 @@
+
+
+These folders contain the deign for all the mechanical components of the grasping platform.
+The Solidworks parts and assemblies are present, but not the STLs used to 3D print them.
+
+The main manipulator with gripper assembly is: 
+manipulator/arm.SLDASM
+
+The gripper and camera mounts are the following subassemblies:
+gripper/gripper.SLDASM
+realsenseD415_mount/realsense_mount.SLDASM
+
+Designs produced to mount the endstop switches, electronics, and to test the grippers force are also included:
+/home/ben/Planar-Grasping-Platform/scara_CAD/endstops
+/home/ben/Planar-Grasping-Platform/scara_CAD/controller
+/home/ben/Planar-Grasping-Platform/scara_CAD/force_sensor_package/load_cell_cone.SLDPRT

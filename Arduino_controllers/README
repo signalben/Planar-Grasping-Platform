@@ -3,3 +3,28 @@ This software allows low-level actuation of the scara arm and gripper, controlle
 
 The gripper controller was developed as part of this work, but includes code references. It runs on an Arduino Nano.
 The scara controller is existing software. It runs on an Arduino Mega 2560.
+
+_________________________________________________________________________________
+## Installation
+
+Plug in an Arduino Mega, open the Arduino IDE, select tools -> board -> Mega 2560
+From the top bar select Sketch -> Include Library -> Add ZIP.library
+Navigate to the following folder, click OK:
+~/Arduino_controllers/scara_controller/grbl-Mega-4axis-4axis/grbl
+Open and upload the sketch:
+~/Arduino_controllers/scara_controller/grbl-Mega-4axis-4axis/grbl/examples/grblUpload/grblUpload.ino
+To verify the upload, on the serial monitor at 57600 baud, the following message should be recieved:
+"Grbl 1.1e ['$' for help]"
+
+Plug in an Arduino Nano, in the Arduino IDE, select tools -> board -> Nano
+Open and upload the sketch:
+~/Arduino_controllers/gripper/gripper.ino
+To verify the upload, on the serial monitor at 57600 baud, the following message should be recieved:
+"Ready - Use &E to enable control"
+
+Using jumper leads, link the following pins:
+Mega Rx0 to Nano D9
+Mega Rx1 to Nano D8 
+Mega Gnd to Nano Gnd
+
+For further use only the Nano should be connected via USB

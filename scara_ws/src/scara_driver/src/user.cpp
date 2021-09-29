@@ -32,7 +32,7 @@ ros::spinOnce();
 string user_input;
 cin >> user_input;
 std_msgs::String to_send;
-to_send.data = user_input + "\r";
+to_send.data = user_input;
 send_pub.publish(to_send);
 
     }

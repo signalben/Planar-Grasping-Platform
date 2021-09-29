@@ -34,7 +34,8 @@ roslaunch scara_grasping cnn.launch
 rosrun scara_grasping execute_grasps.py
 """
 full_FOV = 0 			#use all of FOV or just central portion
-show_grasps = 1 		#visualize grasps within RGB image
+show_grasps = 0 		#visualize grasps within RGB image
+real_robot = False		#set to false if not using a real robot with an AruCo marker attached to the gripper
 start = [-2.1, -3.75, 0.09, 0]	#gripper position for observing gripper pose
 out_view = [-2.1, -1, 0.09, 0]	#gripper position out of camera view so that grasps are not generated using imaging of the gripper
 
@@ -113,23 +114,28 @@ def planar_show(grasp_pose, jaw_opening_width):
 
 #function obtains the grippers position using RGB and depth images
 def get_gripper_visual():
-	while not rospy.is_shutdown():
-		image = rgbcam.get_img()		 #Firstly get an RGB image
-		gripper_pose = rgbcam.get_gripper(image) #then get the planar pose of gripper within that image (x,y,z,yaw), z is left empty
-		depth_img = dcam.get_img()		 #then get a depth image
-		if(gripper_pose is not None):
-			gripper_point = projector.point_from_image(gripper_pose, depth_img) #As with grasps, get position in camera frame
-			gripper_point = projector.map_points_to_world(gripper_point)	    #then convert to world frame
+	if(real_robot == True): #using a real robot
+		while not rospy.is_shutdown():
+			image = rgbcam.get_img()		 #Firstly get an RGB image
+			gripper_pose = rgbcam.get_gripper(image) #then get the planar pose of gripper within that image (x,y,z,yaw), z is left empty
+			depth_img = dcam.get_img()		 #then get a depth image
+			if(gripper_pose is not None):
+				gripper_point = projector.point_from_image(gripper_pose, depth_img) #As with grasps, get position in camera frame
+				gripper_point = projector.map_points_to_world(gripper_point)	    #then convert to world frame
 	
-			quat = projector.eul_to_quat([0, 0, gripper_pose[3]])		    #Construct and send a 3D gripper pose for visualization 
-			quat = Quaternion(quat[0], quat[1], quat[2], quat[3]) 
-			gripper_pose_pub.update_quat(quat)
-			gripper_pose_pub.update_point(gripper_point)
-			gripper_pose_pub.pub()
-			rate.sleep()
-			break
+				quat = projector.eul_to_quat([0, 0, gripper_pose[3]])		    #Construct and send a 3D gripper pose for visualization 
+				quat = Quaternion(quat[0], quat[1], quat[2], quat[3]) 
+				gripper_pose_pub.update_quat(quat)
+				gripper_pose_pub.update_point(gripper_point)
+				gripper_pose_pub.pub()
+				rate.sleep()
+				break
 
-	return gripper_pose, gripper_point	#returns the grippers planar pose in image space, gripper point in world frame  
+	else:	#not using a real robot, assume gripper is where tf indicates it is
+		gripper_point = add_stamp(projector.get_estimated_gripper_point(), "world")		
+		gripper_pose  = [0, 0, 0, projector.get_estimated_gripper_yaw()] #u,v,z,yaw, only yaw used
+
+	return gripper_pose, gripper_point #returns the grippers planar pose in image space, gripper point in world frame  
 
 #Gives a correcting offset to the driver node for gripper yaw (AL link), requires visually measured yaw value as argument  
 def calibrate_gripper_rotation(observed_yaw):

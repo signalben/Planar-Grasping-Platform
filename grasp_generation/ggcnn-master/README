@@ -8,24 +8,23 @@ The following files have been added:
 	- ggcnn-master/run.py				 - gives grasps from depth images, calibrates background 
 	- ggcnn-master/ROSlink.py			 - allows communication with ROS usings sockets
 	- ggcnn-master/models/ggcnn2_bn.py		 - derivative of GGCNN2 with addition of batchnormalization
+	- cornell_background.txt, cornell_sample.txt,    - store images so that run.py can operate without access to the full Cornell dataset 
+	  depth_background.txt, scale_factor.txt   
 
 The following folders have been added:
 	- pretrained_models				 - contains models trained using Google Colab
 	- trained_models				 - contains pretrained models obtained from https://github.com/dougsm/ggcnn/releases/tag/v0.1 
-	- cornell					 - containes the Cornell Grasping Dataset 
+	- cornell					 - location for the Cornell Grasping Dataset 
 
 The following files have been modified:
 	- ggcnn-master/train_ggcnn.py			 - OpenCV compatibility change, removed use of TensorboardX
 	- ggcnn-master/utils/data/cornell_data.py	 - OpenCV compatibility change, changed to use floating depth images
         - ggcnn-master/utils/dataset_processing/image.py - OpenCV compatibility change 
 
-The original link for downloading the Cornell grasping dataset is dead, but it can be obtained from:
-	https://www.kaggle.com/oneoneliu/cornell-grasp
+_________________________________________________________________________________
+## Installation
 
-To avoid compatability issues the files contained in ggcnn-master are run in an Anaconda environment:
-          conda version : 4.5.4
-         python version : 3.6.5
-
+To avoid compatability issues the files contained in ggcnn-master are run in an Anaconda environment.
 To create the environment 'gr', and install the required packages:
 
 conda create --name gr python=3
@@ -54,15 +53,36 @@ scikit-image              0.18.1
 opencv                    3.4.2
 torchsummary              1.5.1
 
-The pointcloud files of the Cornell dataset will need to be converted to .tiffs:
+_________________________________________________________________________________
+## To run
 
-python -m utils.dataset_processing.generate_cornell_depth ggcnn-master/cornell
+If the ROS installation is complete:
 
-python eval_ggcnn.py --network pretrained_models/epoch_50_cornell --dataset cornell --dataset-path 	ggcnn-master/cornell --iou-eval
-python train_ggcnn.py --description training_example2 --network ggcnn2 --dataset cornell  --dataset-path 	ggcnn-master/cornell
+roslaunch scara_grasping cnn.launch
 
-python -m utils.dataset_processing.generate_cornell_depth /home/ben/ggcnn2/ggcnn-master/cornell
-python eval_ggcnn.py --network pretrained_models/epoch_50_cornell --dataset cornell --dataset-path /home/ben/ggcnn2/ggcnn-master/cornell --iou-eval
+Alternatively:
+
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate gr
+cd ~/Planar-Grasping-Platform/grasp_generation/ggcnn-master
+python run.py
+
+The text "Ready to generate grasp" indicates that the CNN is operational, and the program is waiting to recieve a depth image via sockets
+_________________________________________________________________________________
+## Local training and evaluation of models:
+
+The original link for downloading the Cornell grasping dataset is dead, but it can be obtained from:
+	https://www.kaggle.com/oneoneliu/cornell-grasp
+
+The pointcloud files of the Cornell dataset will need to be converted to .tiffs (as described by the original_documentation):
+
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate gr
+cd ~/Planar-Grasping-Platform/grasp_generation/ggcnn-master
+python -m utils.dataset_processing.generate_cornell_depth /cornell
+
+python eval_ggcnn.py --network pretrained_models/epoch_50_cornell --dataset cornell --dataset-path  /cornell --iou-eval
+python train_ggcnn.py --description example --network ggcnn2 --dataset cornell  --dataset-path /cornell
 
 
 References:

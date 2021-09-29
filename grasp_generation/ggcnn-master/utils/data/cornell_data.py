@@ -65,7 +65,7 @@ class CornellDataset(GraspDatasetBase):
         return gtbbs
 
         #original get_depth function, uncomment to give standard depth images
-    """
+    
     def get_depth(self, idx, rot=0, zoom=1.0):
         depth_img = image.DepthImage.from_tiff(self.depth_files[idx])
         center, left, top = self._get_crop_attrs(idx)
@@ -200,6 +200,7 @@ class CornellDataset(GraspDatasetBase):
             rgb_img.normalise()
             rgb_img.img = rgb_img.img.transpose((2, 0, 1))
         return rgb_img.img
+    """
 
 """
 References:

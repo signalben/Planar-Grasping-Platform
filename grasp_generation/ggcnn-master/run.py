@@ -26,6 +26,7 @@ show_output = 0			#show output grasp maps from model
 show_input = 0			#show input depth image
 m_select = 4			#select which model to use
 adjust_grasp_position = 0	#apply shifting of grasp positon based on distance from centre of image, object height (not used by default)
+full_dataset_available = 0
 
 #show single channel image using colormap
 def show_colormap(windows_name, image, normalize):		
@@ -44,55 +45,56 @@ def show_greyscale(windows_name, image):
 			result = cv2.waitKey(10)
 
 if(m_select == 1):
-	model = torch.load("1_G1_80_77")	#GGCNN1 80/100 epochs
+	model = torch.load("trained_models/1_G1_80_77")	#GGCNN1 80/100 epochs
 	floating = 0
 
 elif(m_select == 2):
-	model = torch.load("2_G2_22_86")	#GGCNN2 22/100 epochs
+	model = torch.load("trained_models/2_G2_22_86")	#GGCNN2 22/100 epochs
 	floating = 0
 
 elif(m_select == 3):
-	model = torch.load("3_G2_50_79_F")	#GGCNN2 50/100 epochs floating normalized images
+	model = torch.load("trained_models/3_G2_50_79_F")	#GGCNN2 50/100 epochs floating normalized images
 	floating = 1
 
 elif(m_select == 4):
-	model = torch.load("4_G2B_35_80_F")	#GGCNN2 35/100 epochs floating normalized images, batch normalization
+	model = torch.load("trained_models/4_G2B_35_80_F")	#GGCNN2 35/100 epochs floating normalized images, batch normalization
 	floating = 1
 
 elif(m_select == 5):
-	model = torch.load("5_G2B_82_89") 	#GGCNN2 82 epochs, batchnorm
+	model = torch.load("trained_models/5_G2B_82_89") 	#GGCNN2 82 epochs, batchnorm
 	floating = 0
 
 elif(m_select == 6):
-	model = torch.load("ggcnn_epoch_23_cornell")	#GGCNN1 23 epochs, pretrained
+	model = torch.load("pretrained_models/ggcnn_epoch_23_cornell")	#GGCNN1 23 epochs, pretrained
 	floating = 0
 
 elif(m_select == 7):
-	model = torch.load("epoch_50_cornell") 	#GGCNN2 50 epochs, pretrained
+	model = torch.load("pretrained_models/epoch_50_cornell") 	#GGCNN2 50 epochs, pretrained
 	floating = 0
 
 elif(m_select == 8):
-	model = torch.load("8_G2_93_82") 	#GGCNN2 93 epochs
+	model = torch.load("trained_models/8_G2_93_82") 	#GGCNN2 93 epochs
 	floating = 0
 
 #use gpu for running model
 device = torch.device("cuda:0")
 
-#load Cornell dataset as object (requires ggcnn-master/utils/dataset_processing/generate_cornell_depth.py to have been run to convert pointcloud files to tiff images)
-Dataset = get_dataset("cornell")
-cornell_data = Dataset("/home/ben/ggcnn2/ggcnn-master/cornell")
-idx = 1 #coffee cup--221
 
+if (full_dataset_available ==  1):
+	#load Cornell dataset as object (requires ggcnn-master/utils/dataset_processing/generate_cornell_depth.py to have been run to convert pointcloud files to tiff images)
+	Dataset = get_dataset("cornell")
+	cornell_data = Dataset("home/YOUR_USERNAME/Planar-Grasping-Platform/grasp_generation/ggcnn-master/cornell")
+	idx = 221 #coffee cup--221
+	cornell_img = cornell_data.get_depth(idx) #load single depth image from Cornell dataset
 
-
-
+else:	
+	cornell_img = np.loadtxt('cornell_sample.txt', dtype=float)  #coffee cup--221
+	
 
 #routine to capture background image
 if(get_background_calibration == True):
 	scale_factor = 1
 	error_tolerance = 0.01
-
-	cornell_img = cornell_data.get_depth(idx) #load single depth image from Cornell dataset
 
 	c_curve = 0.5*(cornell_img[:,50] + cornell_img[:,250]) #column average from edges of image
 	c_background = []
@@ -169,9 +171,6 @@ c_background = np.loadtxt('cornell_background.txt', dtype=float)
 r_background = np.loadtxt('depth_background.txt', dtype=float)
 scale_factor = float(np.loadtxt('scale_factor.txt', dtype=float))
 
-
-
-
 #main loop for grasp generation
 while(True):
 	with torch.no_grad(): #only using forward pass of model
@@ -207,14 +206,11 @@ while(True):
 				f.add_subplot(2,2, 1)
 				plt.imshow(depth_img, cmap = 'gray')
 
-				c_depth_img = cornell_data.get_depth(idx)
-				print("c_Depth min :" + str(c_depth_img.min()) + " Max: " + str(c_depth_img.max()) + " Mean: " + str(c_depth_img.mean()) + " Std: " + str(c_depth_img.std()) )
+				print("Dataset min :" + str(cornell_img.min()) + " Max: " + str(cornell_img.max()) + " Mean: " + str(cornell_img.mean()) + " Std: " + str(cornell_img.std()) )
 				f.add_subplot(2,2, 3)
-				plt.imshow(c_depth_img, cmap = 'gray')
+				plt.imshow(cornell_img, cmap = 'gray')
 				plt.show(block=True)
 				plt.show()
-				print("Dataset index is:", idx)
-				idx += 1
 
 			np_input = np.expand_dims(depth_img, 0)	#expand image to 1*300*300
 			np_input = np.expand_dims(np_input, 0)  #expand image to 1*1*300*300 (model expects batch of one channel 2D images)
