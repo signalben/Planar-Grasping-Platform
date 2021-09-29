@@ -24,7 +24,7 @@ https://youtu.be/M_flOcwguvU
 
 _________________________________________________________________________________
 ## Components
-scara_CAD 		- Contains the Solidworks models of the scara arm, gripper, and mounts for the endstops, camera, microcontroller  
+scara_CAD 		- Contains models of the scara arm, gripper, mounts for the endstops, camera, microcontrollers  
 Arduino_controllers	- Contains the Arduino sketches used for low-level control of the scara arm and gripper  
 electrical_schematic	- Details electrical components used and is a full wiring diagram  
 scara_ws		- Is the ROS workspace used for high-level control of the arm  
