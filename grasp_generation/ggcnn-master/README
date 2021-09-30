@@ -37,6 +37,7 @@ conda install matplotlib
 conda install scikit-image
 conda install -c menpo opencv
 pip install torchsummary
+pip install pyrealsense
 
 conda list 
 
