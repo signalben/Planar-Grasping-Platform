@@ -11,6 +11,9 @@ scara_moveit_config - configuration for control of arm with moveit
 scara_bringup       - runs static camera transform, joint state publisher, robot state publisher, realsense camera, moveit, rviz
 scara_grasping      - controller for moveit to control arm. Starts the CNN. Provides routines for grasp execution, grasp visualization and calibration of camera pose
 
+Please note the naming convention of manipulator joints, where:  
+J1 = ZJ, J2 = XJ, J3 = YJ, J4 = AJ
+
 References:
 Serial library
 Website: http://wjwwood.github.io/serial/
